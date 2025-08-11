@@ -1,0 +1,19 @@
+# deps y builds
+node_modules/
+dist/
+
+# secrets
+.env
+
+# caches / tmp / IDE
+.cache/
+.local/
+.upm/
+attached_assets/
+.vscode/
+.idea/
+
+# residuos locales
+LPwibby/
+lpwibbyreplit/
+clientcd/

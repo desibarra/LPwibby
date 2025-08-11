@@ -1,0 +1,114 @@
+/* client/src/index.css */
+
+/* 1. Directivas de Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 2. Variables CSS */
+:root {
+  --wibby-whatsapp:      hsl(142, 70%, 49%);
+  --wibby-green:         hsl(75, 85%, 60%);
+  --wibby-surface:       hsl(0, 0%, 10%);
+  --wibby-surface-light: hsl(0, 0%, 15%);
+  --wibby-text:          hsl(0, 0%, 90%);
+  --wibby-text-muted:    hsl(0, 0%, 64%);
+  --border:              hsl(0, 0%, 15%);
+  --border-light:        hsl(0, 0%, 20%);
+}
+
+/* 3. Dark mode overrides */
+.dark {
+  --wibby-surface:       hsl(0, 0%, 8%);
+  --wibby-text:          hsl(0, 0%, 95%);
+  --wibby-text-muted:    hsl(0, 0%, 70%);
+  --border:              hsl(0, 0%, 20%);
+}
+
+/* 4. Estilos base */
+@layer base {
+  html, body, #root {
+    @apply h-full m-0 p-0;
+  }
+  body {
+    @apply bg-wibby-surface text-wibby-text font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+/* 5. Digital Grid Background */
+.digital-grid {
+  @apply absolute inset-0 z-0 pointer-events-none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* 6. Layout principal */
+.content-wrapper {
+  @apply relative flex flex-col min-h-screen overflow-x-hidden;
+}
+.content-wrapper > main {
+  @apply flex-1;
+}
+.content-wrapper > footer {
+  @apply mt-auto;
+}
+
+/* 7. Componentes personalizados */
+@layer components {
+  /* Botón “Contactar” */
+  .btn-contact {
+    @apply inline-block font-semibold rounded-lg px-6 py-2 shadow-lg transition-all duration-300;
+    background-color: var(--wibby-green);
+    color: var(--wibby-surface);
+    border: 2px solid transparent;
+  }
+  .btn-contact:hover {
+    background-color: var(--wibby-surface);
+    color: var(--wibby-green);
+    border-color: var(--wibby-green);
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(75,200,120,0.3);
+  }
+}
+
+/* 8. Utilidades personalizadas */
+@layer utilities {
+  /* Tipografías específicas */
+  .text-wibby-text {
+    color: var(--wibby-text);
+  }
+  .text-wibby-text-muted {
+    color: var(--wibby-text-muted);
+  }
+
+  /* Fondos personalizados */
+  .bg-wibby-surface {
+    background-color: var(--wibby-surface);
+  }
+  .bg-wibby-surface-light {
+    background-color: var(--wibby-surface-light);
+  }
+
+  /* Botón flotante de WhatsApp */
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
+  }
+  .whatsapp-float {
+    @apply fixed bottom-6 right-6 rounded-full p-3 flex items-center justify-center z-50;
+    background: var(--wibby-whatsapp);
+    box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+    animation: pulse-glow 2s cubic-bezier(0.4,0,0.6,1) infinite;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .whatsapp-float:hover {
+    @apply scale-110;
+    box-shadow: 0 6px 25px rgba(37,211,102,0.5);
+  }
+  .whatsapp-float img {
+    @apply w-6 h-6;
+  }
+}
